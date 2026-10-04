@@ -42,8 +42,12 @@ with st.sidebar:
         else:
             SOURCE_FILE.parent.mkdir(parents=True, exist_ok=True)
             SOURCE_FILE.write_text(raw)
-            n_t, n_d = ingest(cfg, SOURCE_FILE, cfg.index_dir)
-            st.success(f"Indexed {n_t} tickets and {n_d} developer profiles.")
+            with st.spinner("Indexing tickets… (first run loads the embedding model)"):
+                try:
+                    n_t, n_d = ingest(cfg, SOURCE_FILE, cfg.index_dir)
+                    st.success(f"Indexed {n_t} tickets and {n_d} developer profiles.")
+                except Exception as exc:
+                    st.error(f"Indexing failed: {exc}")
 
     # index status
     store = VectorStore(cfg.index_dir)
@@ -66,7 +70,11 @@ with tab_triage:
             st.warning("No index yet — build it in the sidebar first.")
         else:
             with st.spinner("Triaging…"):
-                result = TriageAgent(cfg, store).triage(query)
+                try:
+                    result = TriageAgent(cfg, store).triage(query)
+                except Exception as exc:
+                    st.error(f"Triage failed: {exc}")
+                    st.stop()
             if result.action == "note":
                 st.success("Matched a past ticket — wrote an internal note.")
                 st.markdown("#### Note to support")

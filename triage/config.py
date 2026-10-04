@@ -20,6 +20,8 @@ class Config:
     # auto-answered from that thread's resolution rather than routed to a dev.
     similarity_threshold: float = float(os.environ.get("TRIAGE_SIM_THRESHOLD", "0.65"))
     top_k: int = int(os.environ.get("TRIAGE_TOP_K", "3"))
+    embed_timeout: int = int(os.environ.get("TRIAGE_EMBED_TIMEOUT", "600"))
+    chat_timeout: int = int(os.environ.get("TRIAGE_CHAT_TIMEOUT", "900"))
     index_dir: Path = Path(os.environ.get("TRIAGE_INDEX_DIR", str(INDEX_DIR)))
 
 

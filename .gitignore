@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Local index (rebuilt by `python cli.py ingest`)
+index/
+
+# Tests / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Env & secrets
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

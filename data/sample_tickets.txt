@@ -1,0 +1,25 @@
+# Support-channel transcript (free-form). Messages are grouped by ticket ID.
+# Lines start with "speaker:". Anyone who isn't "support" is treated as a dev.
+# A dev message like "resolved"/"fixed"/"shipped" closes the ticket.
+
+support: #101 the login page crashes on Safari for a bunch of our users
+alice: #101 which Safari version are they on?
+support: #101 17.4 on macOS 14 Sonoma, mostly
+alice: #101 reproduced — it's a Safari-specific JS bug in the login handler. fixed in v2.3.1
+support: #102 password reset emails never arrive for accounts with a plus sign in the address
+alice: #102 found it: reset mail for plus-alias accounts was dropped. patched, and added a resend button. resolved
+support: #103 can't log in after changing my password this morning
+support: #104 invoice is showing $139 instead of the $99 team plan we signed up for
+bob: #104 a discount coupon expired on the account. re-applied the promo and issued a credit. resolved
+support: #105 P0 — card was charged twice but the order shows as failed
+bob: #105 investigating the double charge now
+support: #106 refund from a week ago still hasn't arrived
+bob: #106 the refund was stuck in a pending state. pushed it through the gateway. resolved
+support: #107 the dashboard takes 30+ seconds to load after the last update
+carol: #107 traced to a missing index on the events table. added a composite index; loads in under 2s now. resolved
+support: #108 P0 — our webhook receiver is returning HTTP 500s since 14:00 UTC today
+support: #109 staging DB keeps throwing connection timeouts to Postgres
+carol: #109 raised the pool limit and set a 10s connect timeout. resolved
+support: #111 our API rate limiter was rejecting legitimate webhook retries
+carol: #111 relaxed the burst limit on the webhook rate limiter and added jitter. deployed
+support: #110 P1 — user's authenticator code keeps getting rejected, they're locked out
